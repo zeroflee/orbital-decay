@@ -1,7 +1,7 @@
 {
-  "id": "module",
-  "title": "New Module",
-  "description": "",
+  "id": "orbital-decay",
+  "title": "Orbital Decay",
+  "description": "A tool for getting stuff to orbit other stuff for fun and profit.",
   "version": "#{VERSION}#",
   "library": "false",
   "manifestPlusVersion": "1.2.0",
@@ -12,9 +12,10 @@
   },
   "authors": [
     {
-      "name": "The League of Extraordinary FVTT Developers",
-      "url": "https://github.com/League-of-Foundry-Developers",
-      "discord": "discordID#0001"
+      "name": "zeroflee",
+      "url": "https://github.com/zeroflee",
+      "discord": "zeroflee",
+      "ko-fi": "zeroflee"
     }
   ],
   "relationships": {
