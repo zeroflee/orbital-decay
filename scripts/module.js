@@ -58,8 +58,8 @@ Hooks.on('getSceneControlButtons', function(uiButtons) {
   if (tokenButtons) {
     tokenButtons.tools.push({
       name: "${OrbitalDecay.ID}.SetOrbit",
-      title: game.il8n.localize("OrbitalDecay.ButtonHint"),
-      icon: game.i18m.localize("OrbitalDecay.ButtonIcon"),
+      title: game.i18n.localize("OrbitalDecay.ButtonHint"),
+      icon: game.i18n.localize("OrbitalDecay.ButtonIcon"),
       button: true,
       onClick: async () => {
         OrbitalDecay.log(false, "The button was clicked!");
