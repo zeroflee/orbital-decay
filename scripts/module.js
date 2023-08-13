@@ -53,6 +53,7 @@ class ToDoListData {
   });
   
   Hooks.on('getSceneControlButtons', function(uiButtons) {
+    OrbitalDecay.log(false, "hook registered");
     let tokenButtons = uiButtons.find(val => {return val.name == "token";})
     if (tokenButtons) {
       tokenButtons.tools.push({
@@ -63,7 +64,7 @@ class ToDoListData {
         onClick: async () => {
           OrbitalDecay.log(false, "The button was clicked!");
         }
-      }
+      })
 
     }
   }
