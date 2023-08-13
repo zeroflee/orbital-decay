@@ -1,16 +1,16 @@
 'use strict';
 import {libWrapper} from './shim.js';
 
-//  is all junk from the module tutorial that can be stripped out later.
+
 class OrbitalDecay {
   static ID = 'orbital-decay';
 
   static FLAGS = {
-    TODOS: 'todos'
+    ORBITS: 'todos'
   }
 
   static TEMPLATES = {
-    TODOLIST: 'modules/${this.ID}/templates/orbital-decay.hbs'
+    ORBITALDECAY: 'modules/${this.ID}/templates/orbital-decay.hbs'
   }
 
   static log(force, ...args) {
@@ -20,17 +20,85 @@ class OrbitalDecay {
       console.log(this.ID, '|', ...args);
     }
   }
+
+  /**
+		 * Hook into the toolbar and add buttons 
+		 */
+	static _getControlButtons(controls){
+			for (let i = 0; i < controls.length; i++) {
+				if(controls[i].name === "token"){
+					controls[i].tools.push({
+						name: "TAStartTokenAttach",
+						title: game.i18n.format(localizedStrings.button.StartTokenAttach),
+						icon: "fas fa-link",
+						visible: game.user.isGM,
+						onClick: () => TokenAttacher._StartTokenAttach(canvas.tokens.controlled[0]),
+						button: true
+					  });
+					controls[i].tools.push({
+						name: "TAToggleQuickEdit",
+						title: game.i18n.format(localizedStrings.button.ToggleQuickEditMode),
+						icon: "fas fa-feather-alt",
+						visible: game.user.isGM,
+						onClick: () => TokenAttacher.toggleQuickEditMode(),
+						toggle: true,
+						active: getProperty(window, 'tokenAttacher.quickEdit') ?? false,
+					});
+				}
+			}
+			OrbitalDecay.log(false, "Tools added.");
+	}
 }
 
-Hooks.once('devModeReady', ({ registerPackageDebugFlag }) => {
-  registerPackageDebugFlag(OrbitalDecay.ID);
-});
+//  is all junk from the module tutorial that can be stripped out later.
+class ToDoListData {
+  static getToDosForUser(userId) {
+    return game.users.get(userId)?.getFlag(OrbitalDecay.ID, OrbitalDecay.FLAGS.ORBITS);
+  }
+  static createToDo(userID, toDoData) {
+    // generate a random id for this new ToDo and populate the userId
+    const newToDo = {
+      isDone: false,
+      ...toDoData,
+      id: foundry.utils.randomID(16),
+      userId,
+    }
+    // construct the update to insert the new ToDo
+    const newToDos = {
+      [newToDo.id]: newTodo
+    }
+
+    // update the database with the new ToDos
+    return game.users.get(userId)?.setFlag(OrbitalDecay.ID, OrbitalDecay.FLAGS.ORBITS, newToDos);
+  }
+}
+
+
   
+  Hooks.once('devModeReady', ({ registerPackageDebugFlag }) => {
+    registerPackageDebugFlag(OrbitalDecay.ID);
+  });
+  
+  Hooks.on('getSceneControlButtons', function(uiButtons) {
+    let tokenButtons = uiButtons.find(val => {return val.name == "token";})
+    if (tokenButtons) {
+      tokenButtons.tools.push({
+        name: "${OrbitalDecay.ID}.SetOrbit",
+        title: game.il8n.localize("OrbitalDecay.ButtonHint"),
+        icon: game.i18m.localize("OrbitalDecay.ButtonIcon"),
+        button: true,
+        onClick: async () => {
+          OrbitalDecay.log(false, "The button was clicked!");
+        }
+      }
 
-Hooks.once('init', async function() {
+    }
+  }
 
-});
+  Hooks.once('init', async function() {
 
-Hooks.once('ready', async function() {
+  });
 
-});
+  Hooks.once('ready', async function() {
+
+  });
