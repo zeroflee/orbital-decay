@@ -20,7 +20,7 @@ class OrbitalDecay {
       console.log(this.ID, '|', ...args);
     }
   }
-}
+
 
 //  is all junk from the module tutorial that can be stripped out later.
 /**
@@ -50,7 +50,8 @@ class ToDoListData {
   
   Hooks.once('devModeReady', ({ registerPackageDebugFlag }) => {
     registerPackageDebugFlag(OrbitalDecay.ID);
-  });
+  }
+  );
   
   Hooks.on('getSceneControlButtons', function(uiButtons) {
     OrbitalDecay.log(false, "hook registered");
@@ -65,9 +66,8 @@ class ToDoListData {
           OrbitalDecay.log(false, "The button was clicked!");
         }
       })
-
     }
-  }
+  });
 
   Hooks.once('init', async function() {
 
@@ -76,3 +76,4 @@ class ToDoListData {
   Hooks.once('ready', async function() {
 
   });
+}
