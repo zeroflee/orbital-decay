@@ -20,37 +20,10 @@ class OrbitalDecay {
       console.log(this.ID, '|', ...args);
     }
   }
-
-  /**
-		 * Hook into the toolbar and add buttons 
-		 */
-	static _getControlButtons(controls){
-			for (let i = 0; i < controls.length; i++) {
-				if(controls[i].name === "token"){
-					controls[i].tools.push({
-						name: "TAStartTokenAttach",
-						title: game.i18n.format(localizedStrings.button.StartTokenAttach),
-						icon: "fas fa-link",
-						visible: game.user.isGM,
-						onClick: () => TokenAttacher._StartTokenAttach(canvas.tokens.controlled[0]),
-						button: true
-					  });
-					controls[i].tools.push({
-						name: "TAToggleQuickEdit",
-						title: game.i18n.format(localizedStrings.button.ToggleQuickEditMode),
-						icon: "fas fa-feather-alt",
-						visible: game.user.isGM,
-						onClick: () => TokenAttacher.toggleQuickEditMode(),
-						toggle: true,
-						active: getProperty(window, 'tokenAttacher.quickEdit') ?? false,
-					});
-				}
-			}
-			OrbitalDecay.log(false, "Tools added.");
-	}
 }
 
 //  is all junk from the module tutorial that can be stripped out later.
+/**
 class ToDoListData {
   static getToDosForUser(userId) {
     return game.users.get(userId)?.getFlag(OrbitalDecay.ID, OrbitalDecay.FLAGS.ORBITS);
@@ -72,7 +45,7 @@ class ToDoListData {
     return game.users.get(userId)?.setFlag(OrbitalDecay.ID, OrbitalDecay.FLAGS.ORBITS, newToDos);
   }
 }
-
+*/
 
   
   Hooks.once('devModeReady', ({ registerPackageDebugFlag }) => {
