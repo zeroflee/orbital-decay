@@ -1,3 +1,5 @@
 {
-    "MODULE.hello": "hello"
+    "MODULE.hello": "hello",
+    "OrbitalDecay.ButtonHint": "Open the Orbit UI",
+    "OrbitalDecay.ButtonIcon": "fa-light fa-solar-system"
 }
